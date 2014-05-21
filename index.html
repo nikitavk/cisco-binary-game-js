@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>cbg</title>
+    <style>
+        body{
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    for (var i = 0; i < 8; i++ )
+    {
+        var cont = document.createElement("div");
+        cont.style.float = "left";
+        cont.style.margin = "15px";
+        var twos = document.createElement('div');
+        twos.innerHTML = Math.pow(2,7-i);
+        twos.style.color = 'black';
+        var div = document.createElement('div');
+        div.innerHTML = "0";
+        div.style.color = 'blue';
+        div.setAttribute('class', 'order');
+        div.setAttribute('id', i);
+        div.onclick = function() {
+            this.innerHTML ^= 1;
+            this.style.color = this.innerHTML == 0 ? 'blue' : 'orange';
+            var orders = document.getElementsByClassName("order");
+            var number = Array.prototype.slice.call(orders).reduce(function(a,b){
+                return a + b.innerHTML;
+            },"");
+            if (parseInt(number,2) == document.getElementById("number").innerHTML)
+            {
+                document.getElementById('number').innerHTML = Math.floor(Math.random() * 256);
+                document.getElementById('score').innerHTML++;
+            }
+        };
+        cont.appendChild(twos);
+        cont.appendChild(div);
+        document.body.appendChild(cont);
+    }
+    var number = document.createElement("div");
+    number.innerHTML = 7;
+    number.setAttribute('id', 'number');
+    document.body.appendChild(number);
+    var scoreLabel = document.createElement("score-l");
+    scoreLabel.innerHTML = 'score';
+    document.body.appendChild(scoreLabel);
+    var score = document.createElement("div");
+    score.innerHTML = 0;
+    score.setAttribute('id', 'score');
+    document.body.appendChild(score);
+</script>
+</body>
+</html>
